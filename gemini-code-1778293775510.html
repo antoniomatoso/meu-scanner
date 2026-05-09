@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scanner Interno</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; }
+        #preview { width: 100%; max-width: 500px; border: 2px solid #ccc; border-radius: 8px; }
+        button { padding: 15px 30px; font-size: 16px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Scanner de Documentos (Interno)</h2>
+    <!-- O segredo está aqui: o atributo capture solicita a câmera nativa -->
+    <input type="file" accept="image/*" capture="environment" id="file-input" style="display:none">
+    
+    <button onclick="document.getElementById('file-input').click()">Escanear Documento</button>
+    
+    <div id="output" style="margin-top: 20px;">
+        <p>A imagem aparecerá abaixo:</p>
+        <img id="display-image" style="width:100%; display:none;">
+    </div>
+
+    <script>
+        const input = document.getElementById('file-input');
+        const img = document.getElementById('display-image');
+
+        input.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                img.src = URL.createObjectURL(file);
+                img.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
